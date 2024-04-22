@@ -11,13 +11,15 @@ function Navbar() {
       <div className="left">
         <a href="/" className="logo">
           <img src="/logo.png" alt="" />
-          <span>LamaEstate</span>
+          <span>BZengEstate</span>
         </a>
         <a href="/">Home</a>
         <a href="/">About</a>
         <a href="/">Contact</a>
         <a href="/">Agents</a>
       </div>
+
+
       <div className="right">
         {user ? (
           <div className="user">
@@ -34,7 +36,7 @@ function Navbar() {
         ) : (
           <>
             <a href="/">Sign in</a>
-            <a href="/" className="register">
+            <a href="/" className="regis">
               Sign up
             </a>
           </>
@@ -42,8 +44,8 @@ function Navbar() {
         <div className="menuIcon">
           <img
             src="/menu.png"
-            alt=""
-            onClick={() => setOpen((prev) => !prev)}
+            alt="menu icon"
+            onClick={() => setOpen(!open)}
           />
         </div>
         <div className={open ? "menu active" : "menu"}>
