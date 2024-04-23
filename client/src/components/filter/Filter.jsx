@@ -64,7 +64,7 @@ function Filter() {
           />
         </div>
         <button>
-          <img src="/search.png" alt="" />
+          <img src="/search.png" alt="search icon" />
         </button>
       </div>
     </div>

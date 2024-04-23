@@ -39,6 +39,10 @@ function App() {
         {
           path:"/register",
           element:<Register/>
+        },
+        {
+          path: "/listpage",
+          element:<ListPage />
         }
       ]
     }
