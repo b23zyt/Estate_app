@@ -1,18 +1,16 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import prisma from "../lib/prisma.js";
+
 import env from "dotenv";
 // import connectDB from "./config/database.js";
 // import User from "./models/user.js";
 
-const saltRound = 10;
-
 export const register = async(req, res) =>{
     const {username, email, password} = req.body;
-
     try {
         //HASH PASSWORD
-        const hashedPassword = await bcrypt.hash(password, saltRound);
+        const hashedPassword = await bcrypt.hash(password, 10);
         console.log(hashedPassword);
 
         //SAVE DATA TO DATABASE
@@ -23,7 +21,6 @@ export const register = async(req, res) =>{
                 password: hashedPassword,
             },
         });
-
         console.log(newUser);
         res.status(201).json({message: "User Created Successfully"});
     }catch(err) {
@@ -58,25 +55,27 @@ export const login = async(req, res) => {
             {
             id: user.id
             }, 
-            process.env.JWT_SECRET_KEY, 
+            process.env.JWT_SECRET_KEY,
             {expiresIn: age}
         );
+
+        const {password: userPassword, ...userInfo} = user;
         //INCLUDE cookie-parser inside app.js
         //httpOnly: client site javascript cannot access the cookie
-
         //when a user make a request, we can decrypt the token and know the user's id
         res.cookie("token", token, {
             httpOnly: true,
             // secure: true,
             maxAge: age,
-        }).status(200).json({message: "Login Successful!"})
-        
+        }).status(200).json(userInfo);
 
     }catch(err){
         console.log(err);
         res.status(500).json({message: "Failed to login!"});
     }
 };
+
+
 
 //DELETE COOKIE WHEN USER MAKE THE REQUEST
 export const logout = (req, res) =>{
