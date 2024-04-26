@@ -53,7 +53,8 @@ export const login = async(req, res) => {
         //use secret key to hash the id GENERATE SECRET KEY: openssl rand -base64 32
         const token = jwt.sign(
             {
-            id: user.id
+            id: user.id,
+            isAdmin: true,
             }, 
             process.env.JWT_SECRET_KEY,
             {expiresIn: age}
