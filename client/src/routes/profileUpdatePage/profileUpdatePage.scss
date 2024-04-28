@@ -48,8 +48,9 @@
     justify-content: center;
 
     .avatar{
-      width: 50%;
+      width: 60%;
       object-fit: cover;
+      border-radius: 50%;
     }
   }
 }

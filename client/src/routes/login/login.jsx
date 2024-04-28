@@ -18,8 +18,11 @@ function Login() {
     setIsLoading(true);
     setError(""); //REMOVE ERROR  
 
+    //formData 是 JavaScript 中的一个内置对象，用于创建表单数据对象，以便在 fetch 请求或其他情况下发送到服务器。
+    //语句创建了一个 FormData 对象，并将表单元素 evt.target 中的数据添加到该对象中
     const formData = new FormData(evt.target);
 
+    // 获取了用户名、电子邮件和密码
     const username = formData.get("username");
     const email = formData.get("email");
     const password = formData.get("password");
