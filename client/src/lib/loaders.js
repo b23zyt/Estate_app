@@ -4,7 +4,7 @@ import apiRequest from "./apiRequest";
 export const singlePageLoader = async ({request, params}) => {
     const res = await apiRequest("/posts/" + params.id);
     return res.data;
-}
+};
 
 
 export const listPageLoader = async ({request, params}) => {
@@ -14,4 +14,11 @@ export const listPageLoader = async ({request, params}) => {
     return defer({
         postResponse: postPromise,
     });
-}
+};
+
+export const profilePageLoader = async () => {
+    const postPromise = apiRequest("/users/profilePosts");
+    return defer({
+        postResponse: postPromise,
+    });
+};

@@ -21,6 +21,7 @@ model User{
   avatar String?
   createdAt DateTime @default(now())
   posts Post[] //this is an array since a single user can create multiple arrays
+  savePosts SavedPost[]
 }
 
 model Post{
@@ -40,6 +41,7 @@ model Post{
   user User @relation(fields: [userId], references: [id])
   userId String @db.ObjectId
   postDetail PostDetail?
+  savePosts SavedPost[]
 }
 
 enum Type {
@@ -66,4 +68,15 @@ model PostDetail {
   restaurant Int?
   post Post @relation(fields: [postId], references: [id])
   postId String @db.ObjectId @unique
+}
+
+model SavedPost {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  user User @relation(fields: [userId], references: [id])
+  post Post @relation(fields: [postId], references: [id])
+  userId String @db.ObjectId @unique
+  postId String @db.ObjectId @unique
+  createdAt DateTime @default(now())
+
+  @@unique([userId, postId]) //cannot save exactly the same post
 }
