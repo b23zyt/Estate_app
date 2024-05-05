@@ -22,6 +22,8 @@ model User{
   createdAt DateTime @default(now())
   posts Post[] //this is an array since a single user can create multiple arrays
   savePosts SavedPost[]
+  chats Chat[] @relation(fields: [chatIDs], references: [id])
+  chatIDs String[] @db.ObjectId
 }
 
 model Post{
@@ -78,5 +80,25 @@ model SavedPost {
   postId String @db.ObjectId @unique
   createdAt DateTime @default(now())
 
-  @@unique([userId, postId]) //cannot save exactly the same post
+  @@unique([userId, postId])
+   //cannot save exactly the same post
+}
+
+model Chat {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  users User[] @relation(fields: [userIDs], references: [id])
+  userIDs String[] @db.ObjectId
+  createAt DateTime @default(now())
+  seenBy String[] @db.ObjectId
+  message Message[]
+  lastMessage String?
+}
+
+model Message {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  text String 
+  userId String
+  chat Chat @relation(fields: [chatId], references: [id])
+  chatId String @db.ObjectId
+  createAt DateTime @default(now())
 }
