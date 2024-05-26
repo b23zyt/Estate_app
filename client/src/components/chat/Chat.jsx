@@ -7,8 +7,8 @@ import { SocketContext } from "../../context/SocketContext";
 import { useNotificationStore } from "../../lib/notificationStore";
 
 function Chat({chats}) {
-  console.log(chats);
-  const [chat, setChat] = useState(null);
+  //console.log(chats);
+  const [chat, setChat] = useState(false);
   const {currentUser} = useContext(AuthContext);
   const {socket} = useContext(SocketContext);
 
@@ -26,7 +26,7 @@ function Chat({chats}) {
   const handleOpenChat = async (id, receiver) => {
     try {
       const res = await apiRequest("/chats/" + id);
-      if(!res.data.seenBy.include(currentUser.id)){
+      if(!res.data.seenBy.includes(currentUser.id)){
         decrease();
       }
       setChat({...res.data, receiver})
@@ -89,17 +89,17 @@ function Chat({chats}) {
       <div className="messages">
         <h1>Messages</h1>
         {
-          chats?.map(chat => (
+          chats?.map(c => (
             <div className="message" 
-              key={chat.id} 
-              style={{backgroundColor: chat.seenBy.includes(currentUser.id) || chat?.id === chat.id ? "white" : "#fecd514e",}}
-              onClick={() => handleOpenChat(chat.id, chat.receiver)}>
+              key={c.id} 
+              style={{backgroundColor: c.seenBy.includes(currentUser.id) || c?.id === c.id ? "white" : "#fecd514e",}}
+              onClick={() => handleOpenChat(c.id, c.receiver)}>
               <img
-                src={chat.receiver.avatar || "/noavatar.jpg"}
+                src={c.receiver.avatar || "/noavatar.jpg"}
                 alt=""
               />
-              <span>{chat.receiver.username}</span>
-              <p>{chat.lastMessage}</p>
+              <span>{c.receiver.username}</span>
+              <p>{c.lastMessage}</p>
             </div>
           ))
         }
@@ -127,7 +127,7 @@ function Chat({chats}) {
               key={message.id}
             >
               <p>{message.text}</p>
-              <span>{format(message.createAt)}</span>
+              <span>{format(message.createdAt)}</span>
             </div>
           ))}
           <div ref={messageEndRef}>
