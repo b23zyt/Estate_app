@@ -88,7 +88,7 @@ model Chat {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   users User[] @relation(fields: [userIDs], references: [id])
   userIDs String[] @db.ObjectId
-  createAt DateTime @default(now())
+  createdAt DateTime @default(now())
   seenBy String[] @db.ObjectId
   message Message[]
   lastMessage String?
@@ -100,5 +100,5 @@ model Message {
   userId String
   chat Chat @relation(fields: [chatId], references: [id])
   chatId String @db.ObjectId
-  createAt DateTime @default(now())
+  createdAt DateTime @default(now())
 }

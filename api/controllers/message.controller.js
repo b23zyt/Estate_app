@@ -27,7 +27,7 @@ export const addMessage = async (req, res) => {
             },
         });
 
-        //UPDATE THE SEENBY ARRAY (only user id)
+        //UPDATE THE SEENBY ARRAY (only userid)
         await prisma.chat.update({
             where: {
                 id: chatId,
