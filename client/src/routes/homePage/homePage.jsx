@@ -14,19 +14,16 @@ function HomePage() {
         <div className="wrapper">
           <h1 className="title">Find Real Estate & Get Your Dream Place</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
-            explicabo suscipit cum eius, iure est nulla animi consequatur
-            facilis id pariatur fugit quos laudantium temporibus dolor ea
-            repellat provident impedit!
+          Welcome to BZengEstate, your trusted partner in finding the perfect home or investment property, where exceptional service meets unparalleled local expertise.
           </p>
           <SearchBar />
           <div className="boxes">
             <div className="box">
-              <h1>16+</h1>
+              <h1>20+</h1>
               <h2>Years of Experience</h2>
             </div>
             <div className="box">
-              <h1>200</h1>
+              <h1>18</h1>
               <h2>Award Gained</h2>
             </div>
             <div className="box">

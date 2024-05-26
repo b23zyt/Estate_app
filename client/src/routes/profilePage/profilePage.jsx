@@ -78,7 +78,7 @@ function ProfilePage() {
                 <p>Error loading posts!</p>
               }
             >
-              {(postResponse) => <List posts={postResponse.data.savePosts}/>}
+              {(postResponse) => <List posts={postResponse.data.savedPosts}/>}
             </Await>
           </Suspense>
         </div>

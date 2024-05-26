@@ -17,15 +17,15 @@ function SinglePage() {
   const {currentUser} = useContext(AuthContext);
 
   const handleSave = async () => {
-    setSaved(prev=> !prev);
     if (!currentUser){
       navigate("/login");
     }
+    setSaved((prev) => !prev);
     try {
       await apiRequest.post("/users/save", {postId: post.id});
     }catch(err) {
       console.log(err);
-      setSaved(prev => !prev);
+      setSaved((prev) => !prev);
     }
   };
 
@@ -77,7 +77,7 @@ function SinglePage() {
             <div className="feature">
               <img src="/fee.png" alt="" />
               <div className="featureText">
-                <span>Income policy</span>
+                <span>Income Policy</span>
                 <p>{post.postDetail.income}</p>
               </div>
             </div>
@@ -86,15 +86,15 @@ function SinglePage() {
           <div className="sizes">
             <div className="size">
               <img src="/size.png" alt="" />
-              <span>{post.postDetail.size} sqft</span>
+              <span>{post.postDetail.size} square meters</span>
             </div>
             <div className="size">
               <img src="/bed.png" alt="" />
-              <span>{post.bedroom} beds</span>
+              <span>{post.bedroom > 1 ? post.bedroom + " beds" : post.bedroom + " bed"}</span>
             </div>
             <div className="size">
               <img src="/bath.png" alt="" />
-              <span>{post.bathroom} bathroom</span>
+              <span>{post.bathroom > 1? post.bathroom + " bathrooms" : post.bathroom + " bathroom" }</span>
             </div>
           </div>
           <p className="title">Nearby Places</p>
@@ -110,14 +110,14 @@ function SinglePage() {
               <img src="/pet.png" alt="" />
               <div className="featureText">
                 <span>Bus Stop</span>
-                <p>{post.postDetail.bus}m away</p>
+                <p>{post.postDetail.bus > 999 ? post.postDetail.bus/1000 + "km" : post.postDetail.bus + "m"} away</p>
               </div>
             </div>
             <div className="feature">
               <img src="/fee.png" alt="" />
               <div className="featureText">
                 <span>Restaurant</span>
-                <p>{post.postDetail.restaurant}m away</p>
+                <p>{post.postDetail.restaurant > 999 ? post.postDetail.restaurant/1000 + "km" : post.postDetail.restaurant + "m"} away</p>
               </div>
             </div>
           </div>

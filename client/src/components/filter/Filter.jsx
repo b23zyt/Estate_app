@@ -1,37 +1,42 @@
-import { useSearchParams } from "react-router-dom";
-import "./filter.scss";
 import { useState } from "react";
+import "./filter.scss";
+import { useSearchParams } from "react-router-dom";
 
 function Filter() {
-
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState({
     type: searchParams.get("type") || "",
     city: searchParams.get("city") || "",
     property: searchParams.get("property") || "",
-    minPrice: searchParams.get("minPrice") || 0,
-    maxPrice: searchParams.get("maxPrice") || 10000000,
-    bedroom: searchParams.get("bedroom") || 1,
+    minPrice: searchParams.get("minPrice") || "",
+    maxPrice: searchParams.get("maxPrice") || "",
+    bedroom: searchParams.get("bedroom") || "",
   });
 
-  const handleChange = evt => {
+  const handleChange = (e) => {
     setQuery({
-      ...query, 
-      [evt.target.name]: evt.target.value,
+      ...query,
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleFilter = () => {
     setSearchParams(query);
-  }
+  };
 
-  //console.log(searchParams.get("city"));
+  const city = searchParams.get("city");
+
 
   return (
     <div className="filter">
-      <h1>
-        Search results for <b>{searchParams.get("city")}</b>
-      </h1>
+
+     {(!city) && <h1>Search results for<b>{searchParams.get("type")} </b></h1>}
+
+      {city && <h1>
+        Search results for <b>{searchParams.get("type")}</b> in <b>{searchParams.get("city")}</b>
+      </h1>}
+
+
       <div className="top">
         <div className="item">
           <label htmlFor="city">Location</label>
@@ -48,7 +53,12 @@ function Filter() {
       <div className="bottom">
         <div className="item">
           <label htmlFor="type">Type</label>
-          <select name="type" id="type" onChange={handleChange} defaultValue={query.type}>
+          <select
+            name="type"
+            id="type"
+            onChange={handleChange}
+            defaultValue={query.type}
+          >
             <option value="">any</option>
             <option value="buy">Buy</option>
             <option value="rent">Rent</option>
@@ -56,7 +66,12 @@ function Filter() {
         </div>
         <div className="item">
           <label htmlFor="property">Property</label>
-          <select name="property" id="property" onChange={handleChange} defaultValue={query.property}>
+          <select
+            name="property"
+            id="property"
+            onChange={handleChange}
+            defaultValue={query.property}
+          >
             <option value="">any</option>
             <option value="apartment">Apartment</option>
             <option value="house">House</option>
@@ -98,7 +113,7 @@ function Filter() {
           />
         </div>
         <button onClick={handleFilter}>
-          <img src="/search.png" alt="search icon" />
+          <img src="/search.png" alt="" />
         </button>
       </div>
     </div>

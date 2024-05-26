@@ -15,11 +15,11 @@ function ListPage() {
     <div className="listContainer">
       <div className="wrapper">
         <Filter/>
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<p>Loading the Posts...</p>}>
             <Await
               resolve={data.postResponse}
               errorElement={
-                <p>Error loading posts!</p>
+                <p>Error Loading Posts!</p>
               }
             >
               {(postResponse) => postResponse.data.map(post=>(
@@ -31,11 +31,11 @@ function ListPage() {
       </div>
     </div>
     <div className="mapContainer">
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<p>Loading the Map</p>}>
             <Await
               resolve={data.postResponse}
               errorElement={
-                <p>Error loading posts!</p>
+                <p>Error loading Map!</p>
               }
             >
               {(postResponse) => <Map items={postResponse.data}/>}
