@@ -12,6 +12,7 @@ import Register from "./routes/register/register";
 import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
 import NewPostPage from "./routes/newPostPage/newPostPage";
 import { listPageLoader, profilePageLoader, singlePageLoader } from "./lib/loaders";
+import Contact from "./routes/contactPage/Contact";
 
 
 function App() {
@@ -45,6 +46,10 @@ function App() {
         {
           path: "/listpage",
           element:<ListPage />
+        },
+        {
+          path: "/contact",
+          element: <Contact />
         }
       ]
     },
